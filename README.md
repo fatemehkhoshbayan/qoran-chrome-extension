@@ -1,1 +1,1 @@
-# qoran-chrome-extension
+# quran-chrome-extension
