@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Daily Qoran",
+  "name": "Daily Quran",
   "icons": {
     "32": "icons/icon32.png",
     "48": "icons/icon48.png"
