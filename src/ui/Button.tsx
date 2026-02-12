@@ -1,12 +1,20 @@
+import { cn } from '../utils';
 interface IButtonProps {
   text: string;
-  size?: 's' | 'm' | 'lg';
+  onClick?: () => void;
+  className?: string;
 }
 
-function Button({ text }: IButtonProps) {
+function Button({ text, onClick, className }: IButtonProps) {
   return (
-    <button className="rounded-sm border-2 border-blue-900 bg-blue-950 p-4">
-      <p className="text-xl font-medium text-amber-100">{text}</p>
+    <button
+      onClick={onClick}
+      className={cn(
+        'flex-1 rounded-2xl bg-slate-800 py-3 shadow-lg shadow-slate-200 transition-all hover:bg-slate-900 active:scale-95',
+        className,
+      )}
+    >
+      <span className="text-sm font-bold tracking-wider text-amber-100 uppercase">{text}</span>
     </button>
   );
 }

@@ -7,18 +7,16 @@ interface ILayoutProps {
 
 function Layout({ children }: ILayoutProps) {
   return (
-    <div className="relative flex h-full flex-col gap-6 p-4">
-      <header className="sticky top-0 z-50 flex items-end justify-start gap-3 border-b-2 border-blue-950 bg-white px-4 pb-4">
-        <img src={quranLogo} alt="Quran logo" className="h-16 flex-none" />
-        <p className="text-3xl font-medium text-blue-950">Daily Quran</p>
+    <div className="relative flex min-h-screen flex-col bg-linear-to-b from-slate-50 to-slate-100/80">
+      <header className="flex items-center gap-3 border-b border-slate-200/60 bg-white/80 px-6 py-4 backdrop-blur-sm">
+        <img src={quranLogo} alt="Quran logo" className="h-15 w-15 object-contain" />
+        <h1 className="text-lg font-semibold tracking-tight text-slate-800">Daily Quran</h1>
       </header>
 
-      <main className="mx-2 my-10 flex flex-1 flex-col gap-6">{children}</main>
+      <main className="flex flex-1 flex-col overflow-hidden px-4 py-6 sm:px-6">{children}</main>
 
-      <footer className="sticky bottom-0 z-50 bg-blue-950">
-        <p className="p-4 text-sm font-medium text-amber-100">
-          Lets start knowing more about Holy Quran
-        </p>
+      <footer className="mt-auto border-t border-slate-200/60 bg-white/70 py-3 text-center backdrop-blur-sm">
+        <p className="text-sm font-semibold text-slate-400">Explore the Holy Quran</p>
       </footer>
     </div>
   );
