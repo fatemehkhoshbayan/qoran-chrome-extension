@@ -20,6 +20,7 @@ export interface IVerse {
   sajdah_number: number;
   text_uthmani: string;
   chapter_id: number;
+  chapter_name: string;
   page_number: number;
   juz_number: number;
   translations: IVerseTranslation[];
