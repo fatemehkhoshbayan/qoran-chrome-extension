@@ -1,9 +1,42 @@
-import Layout from './Layout';
-import { useFetchRandomVerse } from './services/verse/verse.hooks';
+import { useState } from 'react';
+import Layout from './layouts/Layout';
+import { useVerse } from './services/verse/verse.hooks';
 import { Box, Button } from './ui';
+import { chapterVerseCount } from './constant';
 
 function App() {
-  const { data, isPending, error } = useFetchRandomVerse();
+  const [verseKey, setVerseKey] = useState<string>('');
+  const { data: verse, isPending, error } = useVerse(verseKey);
+
+  const OnChangeVerse = (action: 'next' | 'prev') => {
+    const currentChapter = verse?.chapter_id;
+    const currentVerseNum = verse?.verse_number;
+
+    if (!currentChapter || !currentVerseNum) return;
+
+    let nextChapter = currentChapter;
+    let nextVerse = currentVerseNum;
+
+    const maxInChapter = chapterVerseCount[nextChapter];
+
+    if (action === 'next') {
+      if (nextVerse < maxInChapter) {
+        nextVerse++;
+      } else if (nextChapter < 114) {
+        nextChapter++;
+        nextVerse = 1;
+      }
+    } else {
+      if (nextVerse > 1) {
+        nextVerse--;
+      } else if (nextChapter > 1) {
+        nextChapter--;
+        nextVerse = chapterVerseCount[nextChapter];
+      }
+    }
+
+    setVerseKey(`${nextChapter}:${nextVerse}`);
+  };
 
   return (
     <Layout>
@@ -12,7 +45,7 @@ function App() {
           {/* Chapter Badge */}
           <div className="flex shrink-0 justify-center">
             <span className="rounded-full bg-emerald-50 px-5 py-2 text-xs font-semibold tracking-[0.15em] text-emerald-700 uppercase">
-              {data?.chapter_id ? `Chapter ${data.chapter_id}` : '…'}
+              {verse?.chapter_name ? `${verse.chapter_name}` : '…'}
             </span>
           </div>
 
@@ -33,17 +66,17 @@ function App() {
 
             {isPending && <p className="animate-pulse text-base text-slate-400">Seeking verse…</p>}
 
-            {data && (
+            {verse && (
               <div className="flex max-w-md flex-col gap-5">
                 <p
                   className="font-arabic text-2xl leading-loose text-slate-800 sm:text-3xl"
                   dir="rtl"
                 >
-                  {data.text_uthmani}
+                  {verse?.text_uthmani}
                 </p>
                 <div className="mx-auto h-1 w-25 rounded-full bg-slate-200" />
                 <p className="text-sm leading-relaxed text-slate-500 italic">
-                  "{data.translations?.[0]?.text}"
+                  "{verse?.translations?.[0]?.text}"
                 </p>
               </div>
             )}
@@ -52,9 +85,19 @@ function App() {
 
         {/* Navigation Controls */}
         <div className="flex shrink-0 gap-3">
-          <Button text="prev" />
-          <Button text="play" />
-          <Button text="next" />
+          <Button
+            text="prev"
+            onClick={() => OnChangeVerse('prev')}
+            disabled={verseKey === '1:1'}
+            className={verseKey === '1:1' ? 'cursor-not-allowed opacity-30' : ''}
+          />
+          {/* <Button text="play" /> */}
+          <Button
+            text="next"
+            disabled={verseKey === '114:6'}
+            onClick={() => OnChangeVerse('next')}
+            className={verseKey === '1:1' ? 'cursor-not-allowed opacity-30' : ''}
+          />
         </div>
       </div>
     </Layout>
