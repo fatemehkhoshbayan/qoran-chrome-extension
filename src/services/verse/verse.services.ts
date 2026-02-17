@@ -3,17 +3,21 @@ import verseEndpoints from './verse.endpoints';
 import type { IVerse } from './verse.types';
 
 const verseServices = {
+  getVerse: async (verseKey?: string): Promise<{ verse: IVerse }> => {
+    const endpoint = verseKey ? verseEndpoints.verse_by_key(verseKey) : verseEndpoints.random;
+    const response = await axiosGet.get(endpoint);
+
+    return response.data;
+  },
+
   getRandomVerse: async (): Promise<{ verse: IVerse }> => {
-    const url = verseEndpoints.random;
-    console.log('🌐 Fetching random verse from:', url);
-    try {
-      const response = await axiosGet.get(url);
-      console.log('✅ Verse response:', response.data);
-      return response.data;
-    } catch (error) {
-      console.error('❌ Error fetching verse:', error);
-      throw error;
-    }
+    const response = await axiosGet.get(verseEndpoints.random);
+    return response.data;
+  },
+
+  getVerseByKey: async (verseKey: string): Promise<{ verse: IVerse }> => {
+    const response = await axiosGet.get(verseEndpoints.verse_by_key(verseKey));
+    return response.data;
   },
 };
 

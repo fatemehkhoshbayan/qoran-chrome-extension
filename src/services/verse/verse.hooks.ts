@@ -3,13 +3,13 @@ import type { IVerse } from './verse.types';
 import verseServices from './verse.services';
 import QueryKeys from '../enums';
 
-export function useFetchRandomVerse() {
+export function useVerse(verseKey?: string) {
   const { isPending, data, error, refetch } = useQuery<{ verse: IVerse }>({
-    queryKey: [QueryKeys.GET_RANDOM_VERSE],
-    queryFn: () => verseServices.getRandomVerse(),
+    queryKey: [QueryKeys.VERSE, verseKey || 'random'],
+    queryFn: () => verseServices.getVerse(verseKey),
+    placeholderData: previousData => previousData,
+    staleTime: verseKey ? Infinity : 0,
   });
-
-  console.log('📊 Query state:', { isPending, hasData: !!data, error: error?.message });
 
   return { isPending, data: data?.verse, error, refetch };
 }

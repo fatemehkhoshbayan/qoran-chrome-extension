@@ -1,5 +1,5 @@
 const QueryKeys = {
-  GET_RANDOM_VERSE: 'fetchRandomVerse',
+  VERSE: 'verse',
 } as const;
 
 export default QueryKeys;
