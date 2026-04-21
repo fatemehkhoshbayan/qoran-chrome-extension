@@ -10,7 +10,7 @@ function Box({ children, className }: IBoxProps) {
   return (
     <div
       className={cn(
-        'flex flex-col gap-5 rounded-2xl border border-slate-200/80 bg-white p-6 shadow-lg shadow-slate-200/40 sm:p-8',
+        'flex flex-col gap-5 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-lg shadow-slate-200/40 sm:p-8',
         className,
       )}
     >

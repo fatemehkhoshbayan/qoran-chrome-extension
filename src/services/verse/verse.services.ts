@@ -9,16 +9,6 @@ const verseServices = {
 
     return response.data;
   },
-
-  getRandomVerse: async (): Promise<{ verse: IVerse }> => {
-    const response = await axiosGet.get(verseEndpoints.random);
-    return response.data;
-  },
-
-  getVerseByKey: async (verseKey: string): Promise<{ verse: IVerse }> => {
-    const response = await axiosGet.get(verseEndpoints.verse_by_key(verseKey));
-    return response.data;
-  },
 };
 
 export default verseServices;
