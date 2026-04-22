@@ -3,7 +3,7 @@ import tafsirServices from './tafsir-ai.services';
 import type { ITafsirRequest, ITafsirResponse } from './tafsir-ai.types';
 
 export function useTafsir() {
-  const { mutate, data, isPending, error, isSuccess } = useMutation<
+  const { mutate, data, isPending, error, isSuccess, isError } = useMutation<
     ITafsirResponse,
     Error,
     ITafsirRequest
@@ -17,5 +17,6 @@ export function useTafsir() {
     isPending,
     error,
     isSuccess,
+    isError,
   };
 }
