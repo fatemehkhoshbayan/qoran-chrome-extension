@@ -9,6 +9,20 @@ export interface IVerseTranslation {
   text: string;
   language_name: string;
 }
+
+type VerseData = {
+  id: number;
+};
+
+export interface IVerseTafsir {
+  verses: Record<string, VerseData>;
+  resource_id: number;
+  resource_name: string;
+  language_id: number;
+  translated_name: Record<string, string>;
+  text: string;
+}
+
 export interface IVerse {
   id: number;
   verse_number: number;
@@ -25,4 +39,5 @@ export interface IVerse {
   juz_number: number;
   translations: IVerseTranslation[];
   audio?: IVerseAudio;
+  tafsir?: IVerseTafsir;
 }
