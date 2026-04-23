@@ -86,13 +86,7 @@ function App() {
                 </div>
               )}
             </div>
-            {verse && (
-              <TafsirBox
-                key={tafsirVerseKey}
-                verseKey={tafsirVerseKey}
-                text={verse.text_uthmani}
-              />
-            )}
+            {verse && <TafsirBox key={tafsirVerseKey} verse={verse} />}
           </div>
         </Box>
 
