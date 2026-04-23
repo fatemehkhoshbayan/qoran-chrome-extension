@@ -9,6 +9,7 @@ import { TafsirBox } from './features/tafsir/TafsirBox';
 function App() {
   const [verseKey, setVerseKey] = useState<string>('');
   const { data: verse, isPending, error } = useVerse(verseKey);
+  const tafsirVerseKey = verseKey || verse?.verse_key || '';
 
   const OnChangeVerse = (action: 'next' | 'prev') => {
     const currentChapter = verse?.chapter_id;
@@ -85,9 +86,7 @@ function App() {
                 </div>
               )}
             </div>
-            {verse && (
-              <TafsirBox verseKey={verse.verse_key} text={verse.text_uthmani} />
-            )}
+            {verse && <TafsirBox key={tafsirVerseKey} verse={verse} />}
           </div>
         </Box>
 
