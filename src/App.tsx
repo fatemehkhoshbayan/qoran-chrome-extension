@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Layout from './layouts/Layout';
+import { useSession } from './services/auth/auth.hooks';
+import authServices from './services/auth/auth.services';
 import { useVerse } from './services/verse/verse.hooks';
 import { Box, Button } from './ui';
 import { chapterVerseCount } from './constant';
@@ -9,6 +11,7 @@ import { TafsirBox } from './features/tafsir/TafsirBox';
 function App() {
   const [verseKey, setVerseKey] = useState<string>('');
   const { data: verse, isPending, error } = useVerse(verseKey);
+  const { isLoggedIn } = useSession();
   const tafsirVerseKey = verseKey || verse?.verse_key || '';
 
   const OnChangeVerse = (action: 'next' | 'prev') => {
@@ -82,7 +85,11 @@ function App() {
                       {verse?.chapter_name ? `${verse.chapter_name}` : '…'}
                     </span>
                   </div>
-                  <VerseCard verse={verse} />
+                  <VerseCard
+                    verse={verse}
+                    isLoggedIn={isLoggedIn}
+                    onFavoriteGuest={() => authServices.login().catch(() => {})}
+                  />
                 </div>
               )}
             </div>
