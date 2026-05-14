@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { makeUseAxios } from 'axios-hooks';
+import { chromeStorage } from '../utils/chromeStorage';
 
 declare module 'axios' {
   export interface AxiosRequestConfig {
@@ -18,6 +19,14 @@ export const axiosGet = axios.create({
   baseURL: baseURL,
   method: 'GET',
   headers: { extension_secret: extensionSecret },
+});
+
+axiosGet.interceptors.request.use(async config => {
+  const token = await chromeStorage.get('sessionToken');
+  if (token) {
+    config.headers['x-session-token'] = token;
+  }
+  return config;
 });
 
 export const useAxiosGet = makeUseAxios({
