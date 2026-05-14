@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import quranLogo from '/public/logo.png';
+import { AuthBar } from '../features/auth/AuthBar';
 
 interface ILayoutProps {
   children: ReactNode;
@@ -11,6 +12,7 @@ function Layout({ children }: ILayoutProps) {
       <header className="sticky top-0 flex items-center gap-3 border-b border-slate-200/60 bg-white/80 px-6 py-4 backdrop-blur-sm">
         <img src={quranLogo} alt="Quran logo" className="h-15 w-15 object-contain" />
         <h1 className="text-lg font-semibold tracking-tight text-slate-800">Daily Quran</h1>
+        <AuthBar />
       </header>
 
       <main className="flex flex-1 flex-col overflow-hidden px-4 py-6 sm:px-6">{children}</main>
