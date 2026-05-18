@@ -26,6 +26,8 @@ export function useSession(): ISessionState {
 
     loadFromStorage();
 
+    if (!chromeStorage.isAvailable()) return;
+
     function handleChange(changes: { [key: string]: chrome.storage.StorageChange }) {
       if ('sessionToken' in changes || 'user' in changes) {
         loadFromStorage();
