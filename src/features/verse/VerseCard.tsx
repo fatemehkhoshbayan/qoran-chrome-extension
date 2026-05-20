@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAddBookmark, useBookmarks } from '../../services/bookmarks/bookmarks.hooks';
+import { useAddBookmark, useBookmarks, useRemoveBookmark } from '../../services/bookmarks/bookmarks.hooks';
 import type { IVerse } from '../../services/verse/verse.types';
 
 interface IVerseCardProps {
@@ -32,10 +32,12 @@ function VerseCard({ verse, isLoggedIn, onFavoriteGuest }: IVerseCardProps) {
 
   const { bookmarks } = useBookmarks(isLoggedIn);
   const { addBookmark, isPending: isAdding } = useAddBookmark();
+  const { removeBookmark, isPending: isRemoving } = useRemoveBookmark();
 
-  const isFavorited = bookmarks.some(
+  const favoritedBookmark = bookmarks.find(
     b => b.key === verse.chapter_id && b.verseNumber === verse.verse_number,
   );
+  const isFavorited = Boolean(favoritedBookmark);
 
   function handleHeartClick() {
     if (!isLoggedIn) {
@@ -43,7 +45,9 @@ function VerseCard({ verse, isLoggedIn, onFavoriteGuest }: IVerseCardProps) {
       onFavoriteGuest?.();
       return;
     }
-    if (!isFavorited) {
+    if (isFavorited && favoritedBookmark) {
+      removeBookmark(favoritedBookmark.id);
+    } else {
       addBookmark({ key: verse.chapter_id, verseNumber: verse.verse_number });
     }
   }
@@ -59,9 +63,9 @@ function VerseCard({ verse, isLoggedIn, onFavoriteGuest }: IVerseCardProps) {
         <button
           type="button"
           onClick={handleHeartClick}
-          disabled={isAdding}
-          aria-label={isFavorited ? 'Saved to favorites' : 'Save to favorites'}
-          title={isFavorited ? 'Saved' : 'Save to favorites'}
+          disabled={isAdding || isRemoving}
+          aria-label={isFavorited ? 'Remove from favorites' : 'Save to favorites'}
+          title={isFavorited ? 'Remove from favorites' : 'Save to favorites'}
           className={`absolute right-0 bottom-0 rounded-full p-1.5 transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
             isFavorited
               ? 'text-rose-500 hover:text-rose-600'

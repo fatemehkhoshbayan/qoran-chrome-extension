@@ -32,3 +32,19 @@ export function useAddBookmark() {
 
   return { addBookmark: mutate, isPending };
 }
+
+export function useRemoveBookmark() {
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation<void, Error, string>({
+    mutationFn: bookmarksServices.removeBookmark,
+    onSuccess: (_, removedId) => {
+      queryClient.setQueryData<IBookmark[]>([QueryKeys.BOOKMARKS], previous => {
+        if (!previous) return [];
+        return previous.filter(b => b.id !== removedId);
+      });
+    },
+  });
+
+  return { removeBookmark: mutate, isPending };
+}

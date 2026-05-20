@@ -12,6 +12,10 @@ const bookmarksServices = {
     const response = await axiosGet.post<IBookmark>(bookmarksEndpoints.add, payload);
     return response.data;
   },
+
+  removeBookmark: async (id: string): Promise<void> => {
+    await axiosGet.delete(bookmarksEndpoints.remove(id));
+  },
 };
 
 export default bookmarksServices;
