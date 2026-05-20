@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
-import { cn } from '../utils';
+import { cn } from '@/utils';
 
 interface IBoxProps {
   children: ReactNode;
-  className: string;
+  className?: string;
 }
 
 function Box({ children, className }: IBoxProps) {

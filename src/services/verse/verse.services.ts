@@ -1,4 +1,4 @@
-import { axiosGet } from '../../hook/useAxios';
+import { axiosGet } from '@/hook/useAxios';
 import verseEndpoints from './verse.endpoints';
 import type { IVerse } from './verse.types';
 
