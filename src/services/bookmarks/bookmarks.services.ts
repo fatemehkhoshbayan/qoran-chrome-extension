@@ -1,4 +1,4 @@
-import { axiosGet } from '../../hook/useAxios';
+import { axiosGet } from '@/hook/useAxios';
 import bookmarksEndpoints from './bookmarks.endpoints';
 import type { IAddBookmarkPayload, IBookmark, IBookmarksResponse } from './bookmarks.types';
 

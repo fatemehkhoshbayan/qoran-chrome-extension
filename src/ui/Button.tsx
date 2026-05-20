@@ -1,4 +1,4 @@
-import { cn } from '../utils';
+import { cn } from '@/utils';
 interface IButtonProps {
   text: string;
   onClick?: () => void;

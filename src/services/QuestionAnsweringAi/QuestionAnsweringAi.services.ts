@@ -1,4 +1,4 @@
-import { axiosGet } from '../../hook/useAxios';
+import { axiosGet } from '@/hook/useAxios';
 import questionAnsweringAiEndpoints from './QuestionAnsweringAi.endpoints';
 import type { IAiAnswerRequest, IAiAnswerResponse } from './QuestionAnsweringAi.types';
 

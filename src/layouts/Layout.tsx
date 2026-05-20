@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import quranLogo from '/public/logo.png';
-import { AuthBar } from '../features/auth/AuthBar';
-import { useSession } from '../services/auth/auth.hooks';
+import { AuthBar } from '@/features/auth/AuthBar';
+import { useSession } from '@/services/auth/auth.hooks';
 
 interface ILayoutProps {
   children: ReactNode;

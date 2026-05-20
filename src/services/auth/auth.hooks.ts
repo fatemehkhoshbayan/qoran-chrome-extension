@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { chromeStorage } from '../../utils/chromeStorage';
+import { chromeStorage } from '@/utils/chromeStorage';
 import { onSessionChanged, warmTokenCache } from './auth.events';
 import authServices from './auth.services';
 import type { IUser } from './auth.types';

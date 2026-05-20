@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
+import DOMPurify from 'dompurify';
 import { BookOpen, Sparkles } from 'lucide-react';
-import { useQuestionAnsweringAi } from '../../services/QuestionAnsweringAi/QuestionAnsweringAi.hooks';
-import type { IVerse } from '../../services/verse/verse.types';
+import { useQuestionAnsweringAi } from '@/services/QuestionAnsweringAi/QuestionAnsweringAi.hooks';
+import type { IVerse } from '@/services/verse/verse.types';
 
 interface Props {
   verse: IVerse;
@@ -145,7 +146,7 @@ export const TafsirBox: React.FC<Props> = ({ verse }) => {
             ) : (
               <div
                 className="prose prose-sm max-w-none text-slate-700"
-                dangerouslySetInnerHTML={{ __html: tafsirHtml }}
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(tafsirHtml) }}
               />
             )}
             {hasMoreTafsir && (

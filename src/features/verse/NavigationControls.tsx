@@ -1,6 +1,6 @@
-import { Button } from '../../ui';
-import { chapterVerseCount } from '../../constant';
-import { useVerse } from '../../services/verse/verse.hooks';
+import { Button } from '@/ui';
+import { chapterVerseCount } from '@/constant';
+import { useVerse } from '@/services/verse/verse.hooks';
 
 interface NavigationControlsProps {
   verseKey: string;

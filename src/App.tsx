@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Layout from './layouts/Layout';
-import VerseBox from './features/verse/VerseBox';
-import NavigationControls from './features/verse/NavigationControls';
+import Layout from '@/layouts/Layout';
+import VerseBox from '@/features/verse/VerseBox';
+import NavigationControls from '@/features/verse/NavigationControls';
 
 function App() {
   const [verseKey, setVerseKey] = useState<string>('');

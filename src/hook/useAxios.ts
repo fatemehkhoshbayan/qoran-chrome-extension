@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { makeUseAxios } from 'axios-hooks';
-import { chromeStorage } from '../utils/chromeStorage';
-import { getCachedToken, notifySessionChanged } from '../services/auth/auth.events';
+import { chromeStorage } from '@/utils/chromeStorage';
+import { getCachedToken, notifySessionChanged } from '@/services/auth/auth.events';
 
 declare module 'axios' {
   export interface AxiosRequestConfig {
@@ -51,7 +50,3 @@ axiosGet.interceptors.response.use(
   },
 );
 
-export const useAxiosGet = makeUseAxios({
-  cache: false,
-  axios: axiosGet,
-});

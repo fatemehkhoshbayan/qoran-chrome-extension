@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useSession } from '../../services/auth/auth.hooks';
-import authServices from '../../services/auth/auth.services';
+import { useSession } from '@/services/auth/auth.hooks';
+import authServices from '@/services/auth/auth.services';
 
 export function AuthBar() {
   const { user, isLoggedIn } = useSession();
@@ -42,12 +42,24 @@ export function AuthBar() {
     );
   }
 
+  const liveMessage = isLoggingIn
+    ? 'A sign-in tab has opened. Please complete login there.'
+    : error
+      ? error
+      : '';
+
   return (
     <div className="ml-auto flex flex-col items-end gap-1">
+      {/* Screen-reader announcements for the async login flow */}
+      <span role="status" aria-live="polite" className="sr-only">
+        {liveMessage}
+      </span>
+
       <button
         type="button"
         onClick={handleLogin}
         disabled={isLoggingIn}
+        aria-busy={isLoggingIn}
         className="flex items-center gap-2 rounded-lg border border-emerald-600 bg-emerald-600 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition-colors hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isLoggingIn ? (
@@ -62,7 +74,11 @@ export function AuthBar() {
           'Login with Quran.com'
         )}
       </button>
-      {error && <p className="text-xs text-rose-600">{error}</p>}
+      {error && (
+        <p className="text-xs text-rose-600" role="alert">
+          {error}
+        </p>
+      )}
     </div>
   );
 }

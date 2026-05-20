@@ -4,8 +4,8 @@ import {
   useAddBookmark,
   useBookmarks,
   useRemoveBookmark,
-} from '../../services/bookmarks/bookmarks.hooks';
-import type { IVerse } from '../../services/verse/verse.types';
+} from '@/services/bookmarks/bookmarks.hooks';
+import type { IVerse } from '@/services/verse/verse.types';
 
 interface IVerseCardProps {
   verse: IVerse;

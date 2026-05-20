@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import type { IVerse } from './verse.types';
 import verseServices from './verse.services';
-import QueryKeys from '../enums';
+import QueryKeys from '@/services/enums';
 
 export function useVerse(verseKey?: string) {
   const { isPending, data, error, refetch } = useQuery<{ verse: IVerse }>({

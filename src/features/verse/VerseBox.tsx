@@ -1,10 +1,10 @@
 import { TriangleAlert } from 'lucide-react';
-import { useSession } from '../../services/auth/auth.hooks';
-import authServices from '../../services/auth/auth.services';
-import { useVerse } from '../../services/verse/verse.hooks';
-import { Box, Button } from '../../ui';
+import { useSession } from '@/services/auth/auth.hooks';
+import authServices from '@/services/auth/auth.services';
+import { useVerse } from '@/services/verse/verse.hooks';
+import { Box, Button } from '@/ui';
 import VerseCard from './VerseCard';
-import { TafsirBox } from '../tafsir/TafsirBox';
+import { TafsirBox } from '@/features/tafsir/TafsirBox';
 
 export default function VerseBox({ verseKey }: { verseKey: string }) {
   const { isLoggedIn } = useSession();

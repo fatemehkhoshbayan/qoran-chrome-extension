@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import QueryKeys from '../enums';
+import QueryKeys from '@/services/enums';
 import bookmarksServices from './bookmarks.services';
 import type { IAddBookmarkPayload, IBookmark } from './bookmarks.types';
 
