@@ -54,26 +54,28 @@ function VerseCard({ verse, isLoggedIn, onFavoriteGuest }: IVerseCardProps) {
 
   return (
     <div className="flex max-w-md flex-col gap-5">
-      <div className="relative">
+      <div className="flex flex-col gap-1">
         <p className="font-arabic text-2xl leading-loose text-slate-800 sm:text-3xl" dir="rtl">
           {verse?.text_uthmani}
           {''}
           {arabicVerseNumber}
         </p>
-        <button
-          type="button"
-          onClick={handleHeartClick}
-          disabled={isAdding || isRemoving}
-          aria-label={isFavorited ? 'Remove from favorites' : 'Save to favorites'}
-          title={isFavorited ? 'Remove from favorites' : 'Save to favorites'}
-          className={`absolute right-0 bottom-0 rounded-full p-1.5 transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
-            isFavorited
-              ? 'text-rose-500 hover:text-rose-600'
-              : 'text-slate-300 hover:text-rose-400'
-          }`}
-        >
-          <HeartIcon filled={isFavorited} />
-        </button>
+        <div className="flex justify-end">
+          <button
+            type="button"
+            onClick={handleHeartClick}
+            disabled={isAdding || isRemoving}
+            aria-label={isFavorited ? 'Remove from favorites' : 'Save to favorites'}
+            title={isFavorited ? 'Remove from favorites' : 'Save to favorites'}
+            className={`rounded-full p-1.5 transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+              isFavorited
+                ? 'text-rose-500 hover:text-rose-600'
+                : 'text-slate-300 hover:text-rose-400'
+            }`}
+          >
+            <HeartIcon filled={isFavorited} />
+          </button>
+        </div>
       </div>
 
       {showGuestPrompt && !isLoggedIn && (
