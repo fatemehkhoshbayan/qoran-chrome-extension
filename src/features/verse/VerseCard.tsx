@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import { useAddBookmark, useBookmarks, useRemoveBookmark } from '../../services/bookmarks/bookmarks.hooks';
+import {
+  useAddBookmark,
+  useBookmarks,
+  useRemoveBookmark,
+} from '../../services/bookmarks/bookmarks.hooks';
 import type { IVerse } from '../../services/verse/verse.types';
 
 interface IVerseCardProps {
@@ -53,36 +57,46 @@ function VerseCard({ verse, isLoggedIn, onFavoriteGuest }: IVerseCardProps) {
   }
 
   return (
-    <div className="flex max-w-md flex-col gap-5">
-      <div className="flex flex-col gap-1">
-        <p className="font-arabic text-2xl leading-loose text-slate-800 sm:text-3xl" dir="rtl">
-          {verse?.text_uthmani}
-          {''}
-          {arabicVerseNumber}
-        </p>
-        <div className="flex justify-end">
-          <button
-            type="button"
-            onClick={handleHeartClick}
-            disabled={isAdding || isRemoving}
-            aria-label={isFavorited ? 'Remove from favorites' : 'Save to favorites'}
-            title={isFavorited ? 'Remove from favorites' : 'Save to favorites'}
-            className={`rounded-full p-1.5 transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
-              isFavorited
-                ? 'text-rose-500 hover:text-rose-600'
-                : 'text-slate-300 hover:text-rose-400'
-            }`}
-          >
-            <HeartIcon filled={isFavorited} />
-          </button>
+    <div className="flex max-w-md flex-col gap-6">
+
+      {/* Verse number row + heart */}
+      <div className="flex items-center justify-between">
+        <button
+          type="button"
+          onClick={handleHeartClick}
+          disabled={isAdding || isRemoving}
+          aria-label={isFavorited ? 'Remove from favorites' : 'Save to favorites'}
+          title={isFavorited ? 'Remove from favorites' : 'Save to favorites'}
+          className={`rounded-full p-2 transition-all duration-200 hover:scale-110 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 ${
+            isFavorited
+              ? 'text-rose-500 hover:text-rose-600'
+              : 'text-slate-300 hover:text-rose-400'
+          }`}
+        >
+          <HeartIcon filled={isFavorited} />
+        </button>
+
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-medium tracking-wide text-slate-400 uppercase">Verse</span>
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 font-arabic text-base font-semibold text-slate-600">
+            {arabicVerseNumber}
+          </span>
         </div>
       </div>
 
+      {/* Arabic text */}
+      <p className="font-arabic text-2xl leading-loose text-slate-800 sm:text-3xl" dir="rtl">
+        {verse?.text_uthmani}
+      </p>
+
       {showGuestPrompt && !isLoggedIn && (
-        <p className="text-xs text-slate-500 italic">Login to save favorites.</p>
+        <p className="text-xs text-slate-400 italic">Sign in to save favorites.</p>
       )}
 
-      <div className="mx-auto h-1 w-25 rounded-full bg-slate-200" />
+      {/* Divider */}
+      <div className="mx-auto h-px w-16 rounded-full bg-slate-200" />
+
+      {/* Translation */}
       <p className="text-sm leading-relaxed text-slate-500 italic">
         "{verse?.translations?.[0]?.text}"
       </p>
