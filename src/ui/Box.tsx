@@ -3,7 +3,7 @@ import { cn } from '../utils';
 
 interface IBoxProps {
   children: ReactNode;
-  className: string;
+  className?: string;
 }
 
 function Box({ children, className }: IBoxProps) {

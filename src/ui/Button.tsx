@@ -9,6 +9,7 @@ interface IButtonProps {
 function Button({ text, onClick, className, disabled }: IButtonProps) {
   return (
     <button
+      type="button"
       onClick={onClick}
       className={cn(
         'flex-1 rounded-2xl bg-slate-800 py-3 shadow-lg shadow-slate-200 transition-all hover:bg-slate-900 active:scale-95',

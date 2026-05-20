@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { BookOpen, Sparkles } from 'lucide-react';
 import { useQuestionAnsweringAi } from '../../services/QuestionAnsweringAi/QuestionAnsweringAi.hooks';
 import type { IVerse } from '../../services/verse/verse.types';
 
@@ -79,11 +80,9 @@ export const TafsirBox: React.FC<Props> = ({ verse }) => {
             <button
               type="button"
               onClick={() => setActiveMode('ask')}
-              className="w-full rounded-xl border border-emerald-600 bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:border-emerald-200 hover:bg-emerald-50/60 hover:text-emerald-900"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-600 bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:border-emerald-200 hover:bg-emerald-50/60 hover:text-emerald-900"
             >
-              <span className="mr-2" aria-hidden>
-                ✨
-              </span>
+              <Sparkles size={15} aria-hidden />
               Ask AI a question
             </button>
           </>
@@ -96,7 +95,7 @@ export const TafsirBox: React.FC<Props> = ({ verse }) => {
               aria-label="Show tafsir"
               title="Show tafsir"
             >
-              📖
+              <BookOpen size={16} aria-hidden />
             </button>
             <button
               type="button"
@@ -105,7 +104,7 @@ export const TafsirBox: React.FC<Props> = ({ verse }) => {
               aria-label="Ask AI"
               title="Ask AI"
             >
-              ✨
+              <Sparkles size={16} aria-hidden />
             </button>
           </div>
         )}
